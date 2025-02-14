@@ -24,7 +24,7 @@ export class Product {
     @Column({ type: 'int', default: 0 })
     quantity: number;
 
-    @Column({ type: 'varchar', length: 255 })
+    @Column({ type: 'varchar', length: 255, nullable: true })
     image: string;
     
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
@@ -33,4 +33,4 @@ export class Product {
     @Column({ type: 'timestamp', nullable: true })
     updatedAt: Date;
     
-}
+} 
