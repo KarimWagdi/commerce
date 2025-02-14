@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn } from "typeorm";
 import { Product } from "./Product";
+import { Order } from "./Order";
 
 export enum UserRole {
     ADMIN = "admin",

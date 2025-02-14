@@ -1,17 +1,17 @@
 import { Router } from 'express';
-import OrderController from '../controllers/OrderController';
+import OrderController from '../Controller/OrderController';
 
 const router = Router();
 
 
 router.get('/', OrderController.getOrders);
 
-router.get('/:id', OrderController.getOrderById);
+// router.get('/:id', OrderController.getOrderById);
 
-router.post('/', OrderController.createOrder);
+// router.post('/', OrderController.createOrder);
 
-router.patch('/:id/status', OrderController.updateOrderStatus);
+// router.patch('/:id/status', OrderController.updateOrderStatus);
 
-router.delete('/:id', OrderController.deleteOrder);
+// router.delete('/:id', OrderController.deleteOrder);
 
 export default router;

@@ -10,7 +10,7 @@ class OrderController {
             });
             res.json(orders);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ message: error });
         }
     }
 
@@ -28,7 +28,7 @@ class OrderController {
 
             res.json(order);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ message: error });
         }
     }
 
@@ -68,7 +68,7 @@ class OrderController {
                 });
             });
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ message: error });
         }
     }
 
@@ -91,7 +91,7 @@ class OrderController {
                 order: updatedOrder
             });
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ message: error });
         }
     }
 
@@ -107,7 +107,7 @@ class OrderController {
             await orderRepository.softDelete(req.params.id);
             res.json({ message: "Order deleted successfully" });
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ message: error });
         }
     }
 }
