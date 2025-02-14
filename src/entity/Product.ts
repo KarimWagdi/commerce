@@ -23,7 +23,7 @@ export class Product {
     quantity: number;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    image!: string;
+    image: string;
     
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
