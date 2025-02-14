@@ -31,4 +31,4 @@ export class Product {
     @Column({ type: 'timestamp', nullable: true })
     updatedAt: Date;
     
-}
+} 
