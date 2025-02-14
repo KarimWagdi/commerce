@@ -1,18 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn, OneToOne, JoinColumn } from "typeorm";
+import { User } from "./User";
 
 @Entity()
 export class Wallet {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @OneToOne(() => User, (user) => user.id)
+  user: User;
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+      user_id: number;
+
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   balance!: number;
 
-  @Column({ unique: true })
-  user_id!: string;
-
-//   @OneToOne(() => Wallet, (wallet) => wallet.user_id)
-//   wallet: Wallet;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
