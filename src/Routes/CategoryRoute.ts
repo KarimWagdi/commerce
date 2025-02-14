@@ -1,0 +1,16 @@
+import { Router } from 'express'
+import CategoryController from '../Controller/CategoryController'
+const router = Router()
+
+router.get('/', CategoryController.getCategory);
+
+router.post('/', CategoryController.addCategory);
+
+router.put('/:id', CategoryController.updateCategory);
+
+router.delete('/:id', CategoryController.deleteCategory
+
+    
+);
+
+export default router
