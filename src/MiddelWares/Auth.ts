@@ -2,7 +2,7 @@ import { NextFunction, Response } from 'express'
 import { AppDataSource } from '../dbConfig/data-source'
 const jwt = require('jsonwebtoken')
 
-const jwtSecret = 'your-jwt-secret'
+const jwtSecret = 'your-secret-key'
 
 const verifyToken = async (req: any, res: Response, next: NextFunction) => {
     try{
