@@ -1,18 +1,10 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { User } from "../entity/User";
-
 import { Product } from "../entity/Product";
-
 import { cart } from "../entity/Cart";
-import { Product } from "../entity/Product";
- 
-
 import { Wallet } from "../entity/wallet";
-
 import { Rate } from "../entity/Rate";
-import { Product } from "../entity/Product";
-
 
 
 export const AppDataSource = new DataSource({
@@ -20,13 +12,11 @@ export const AppDataSource = new DataSource({
   host: "localhost",
   port: 3306,
   username: "root",
-
   password: "Password@12345",
-  database: "software",
+  database: "commerce",
   synchronize: true,
   logging: true,
-  entities: [User, Product, Rate],
-
+  entities: [User, Product, Rate, cart, Wallet],
   migrations: [],
   subscribers: [],
 }); 
