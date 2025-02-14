@@ -9,6 +9,8 @@ export class Product {
     @ManyToOne(() => User, user => user.id)
     @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
     user_id: number;
+
+    //@ManyToOne (() => Category )
     
     @Column({ type: 'varchar', length: 100 })
     name: string;
@@ -22,7 +24,7 @@ export class Product {
     @Column({ type: 'int', default: 0 })
     quantity: number;
 
-    @Column({ type: 'varchar', length: 255 })
+    @Column({ type: 'varchar', length: 255, nullable: true })
     image: string;
     
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
@@ -31,4 +33,4 @@ export class Product {
     @Column({ type: 'timestamp', nullable: true })
     updatedAt: Date;
     
-}
+} 
