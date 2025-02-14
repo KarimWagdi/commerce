@@ -9,6 +9,9 @@ export class Product {
     @ManyToOne(() => User, user => user.id)
     @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
     user_id: number;
+
+    @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.product)
+    orderProducts!: OrderProduct[];
     
     @Column({ type: 'varchar', length: 100 })
     name: string;

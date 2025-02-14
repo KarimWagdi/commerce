@@ -37,6 +37,9 @@ export class User {
   @OneToMany(() => Product, (product) => product.user_id)
   product: Product[];
 
+  @OneToMany(() => Order, (order) => order.user)
+  orders!: Order[];
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
   
