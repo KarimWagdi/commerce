@@ -1,6 +1,8 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm"; 
-import { User } from "../entity/User";
+import { User } from "../Entity/User";
+import { Product } from "../Entity/Product";
+import {Category} from "../Entity/Category";
 
 export const AppDataSource = new DataSource({
   type: "mysql",
@@ -11,12 +13,12 @@ export const AppDataSource = new DataSource({
   database: "market",
   synchronize: true, 
   logging: true,
-  entities: [User], 
+  entities: [User, Product, Category], 
   migrations: [],
   subscribers: [],
 });
 
-// Initialize the connection
+
 AppDataSource.initialize()
   .then(() => {
     console.log("Data Source has been initialized!");
