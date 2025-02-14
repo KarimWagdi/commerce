@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { Product } from "./Product";
 
 export enum UserRole {
     ADMIN = "admin",
@@ -33,9 +34,15 @@ export class User {
   })
   role!: UserRole;
 
+  @OneToMany(() => Product, (product) => product.user_id)
+  product: Product[];
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
   
-  @Column({ type: 'timestamp', nullable: true })
+  @UpdateDateColumn({ type: 'timestamp', nullable: true })
   updatedAt: Date;
+
+  @DeleteDateColumn({ type: 'timestamp', nullable: true })
+  deletedAt: Date;
 }
