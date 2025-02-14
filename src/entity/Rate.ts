@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, DeleteDateColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: "rate" })
 export class Rate {
@@ -16,6 +16,16 @@ export class Rate {
 
   @Column({ default: null })
   comment!: string;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    createdAt: Date;
+    
+  @UpdateDateColumn({ type: 'timestamp', nullable: true })
+    updatedAt: Date;
+    
+  
+  @DeleteDateColumn({ type: 'timestamp', nullable: true })
+    deletedAt: Date;
 
 }
 
