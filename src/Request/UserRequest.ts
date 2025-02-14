@@ -23,6 +23,7 @@ export class AddUser{
     @IsDate()
     birthdate: Date;
 
+    
     @IsEnum(UserRole)
     role: UserRole;
 }

@@ -1,7 +1,7 @@
 import { Response } from "express";
 import bcrypt from "bcrypt";
 import { AppDataSource } from "../dbConfig/data-source";
-import { User } from "../Entity/User";
+import { User } from "../entity/User";
 const jwt = require('jsonwebtoken');
 
 
