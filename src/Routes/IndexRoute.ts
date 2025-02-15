@@ -1,29 +1,23 @@
+import { Router } from 'express';
+import UserRoute from './UserRoute';
+import CartRoute from './CartRoute';
+import ProductRoute from './ProductRoute';
+import WalletRoute from './WalletRoute';
+import RateRoute from './RateRoute';
+import OrderRoute from './OrderRoute';
 
-import { Router } from 'express'
-import UserRoute from './UserRoute'
+const router = Router();
 
-import ProductRoute from './ProductRoute'
-
-
-import CartRoute from './CartRoute'
-
-import WalletRoute from './WalletRoutes'
-import RateRoute from "./RateRoute";
-
-const router = Router()
-
-// routes
-
-router.use('/users', UserRoute)
-
-router.use('/products', ProductRoute)
+router.use('/users', UserRoute);
+router.use('/cart', CartRoute);
+router.use('/products', ProductRoute);
+router.use('/wallets', WalletRoute);
+router.use('/rates', RateRoute);
+router.use('/orders', OrderRoute);
 
 
-router.use('/cart',CartRoute)
 
-
-router.use("/rates", RateRoute);
-router.use('/wallets', WalletRoute)
 
 export default router
+
 

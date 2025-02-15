@@ -1,5 +1,8 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
 import { User } from "./User";
+import { OrderProduct } from "./OrderProduct";
 
 @Entity()
 export class Product {
@@ -10,7 +13,9 @@ export class Product {
     @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
     user_id: number;
 
-    //@ManyToOne (() => Category )
+    @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.product)
+    orderProducts!: OrderProduct[];
+
     
     @Column({ type: 'varchar', length: 100 })
     name: string;

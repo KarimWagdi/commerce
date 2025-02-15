@@ -4,6 +4,7 @@ import { AppDataSource } from "../dbConfig/data-source";
 import { User } from "../entity/User";
 const jwt = require('jsonwebtoken');
 
+
 const jwtSecret = 'your-secret-key';
 
 class UserController {

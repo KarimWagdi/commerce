@@ -1,5 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn, OneToOne } from "typeorm";
 import { Product } from "./Product";
+
+import { Wallet } from './wallet';
+
+import { Order } from "./Order";
+
 
 export enum UserRole {
     ADMIN = "admin",
@@ -36,6 +41,14 @@ export class User {
 
   @OneToMany(() => Product, (product) => product.user_id)
   product: Product[];
+
+
+  @OneToOne(() => Wallet, (wallet) => wallet.user_id)
+     wallet: Wallet;
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders!: Order[];
+
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
