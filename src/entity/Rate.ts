@@ -1,6 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, DeleteDateColumn, UpdateDateColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  DeleteDateColumn,
+  UpdateDateColumn,
+  Check
+} from "typeorm";
 
 @Entity({ name: "rate" })
+@Check(`"rate" >= 1 AND "rate" <= 5`)
+
 export class Rate {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -17,16 +26,12 @@ export class Rate {
   @Column({ default: null })
   comment!: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    createdAt: Date;
-    
-  @UpdateDateColumn({ type: 'timestamp', nullable: true })
-    updatedAt: Date;
-    
-  
-  @DeleteDateColumn({ type: 'timestamp', nullable: true })
-    deletedAt: Date;
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  createdAt: Date;
 
+  @UpdateDateColumn({ type: "timestamp", nullable: true })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ type: "timestamp", nullable: true })
+  deletedAt: Date;
 }
-
-
