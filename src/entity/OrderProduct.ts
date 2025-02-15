@@ -19,11 +19,11 @@ export class OrderProduct {
     @Column({ type: "decimal", precision: 10, scale: 2 })
     unit_price!: number;
 
-    @ManyToOne(() => Order, (order) => order.orderProducts)
-    order!: Order;
+    // @ManyToOne(() => Order, (order) => order.orderProducts)
+    // order!: Order;
 
-    @ManyToOne(() => Product, (product) => product.orderProducts)
-    product!: Product;
+    // @ManyToOne(() => Product, (product) => product.orderProducts)
+    // product!: Product;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt!: Date;

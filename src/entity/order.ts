@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, UpdateDateColumn, DeleteDateColumn, JoinColumn } from "typeorm";
 import { User } from "./User";
 import { OrderProduct } from "./OrderProduct";
 
@@ -15,7 +15,8 @@ export class Order {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column()
+    @ManyToOne(() => User, user => user.id)
+    @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
     user_id!: number;
 
     @Column({ nullable: true })
@@ -30,9 +31,6 @@ export class Order {
         default: OrderState.PENDING
     })
     state!: OrderState;
-
-    // @ManyToOne(() => User, (user) => user.orders)
-    // user!: User;
 
     // @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order)
     // orderProducts!: OrderProduct[];

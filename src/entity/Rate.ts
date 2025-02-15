@@ -4,21 +4,24 @@ import {
   Column,
   DeleteDateColumn,
   UpdateDateColumn,
-  Check
+  JoinColumn,
+  ManyToOne
 } from "typeorm";
+import { User } from "./User";
+import { Product } from "./Product";
 
-@Entity({ name: "rate" })
-@Check(`"rate" >= 1 AND "rate" <= 5`)
-
+@Entity()
 export class Rate {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ default: null })
-  productId!: number;
+  @ManyToOne(() => Product, product => product.id)
+  @JoinColumn({ name: 'product_id', referencedColumnName: 'id' })
+  product_id!: Product;
 
-  @Column({ default: null })
-  userId!: number;
+  @ManyToOne(() => User, user => user.id)
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  user_id!: User;
 
   @Column()
   rate!: number;

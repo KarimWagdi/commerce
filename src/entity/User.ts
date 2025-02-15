@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn, OneToOne } from "typeorm";
 import { Product } from "./Product";
-
 import { Wallet } from './wallet';
-
 import { Order } from "./Order";
+import { Cart } from "./Cart";
+import { Rate } from "./Rate";
 
 
 export enum UserRole {
@@ -32,23 +32,8 @@ export class User {
   @Column({ type: "date", nullable: true })
   birthdate!: Date;
 
-  @Column({
-    type: "enum",
-    enum: UserRole,
-    default: UserRole.USER,
-  })
+  @Column({ type: "enum", enum: UserRole, default: UserRole.USER })
   role!: UserRole;
-
-  // @OneToMany(() => Product, (product) => product.user_id)
-  // product: Product[];
-
-
-  // @OneToOne(() => Wallet, (wallet) => wallet.user_id)
-  //    wallet: Wallet;
-
-  // @OneToMany(() => Order, (order) => order.user)
-  // orders!: Order[];
-
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
@@ -58,4 +43,19 @@ export class User {
 
   @DeleteDateColumn({ type: 'timestamp', nullable: true })
   deletedAt: Date;
+
+  @OneToMany(() => Product, (product) => product.user_id)
+  product: Product[];
+
+  @OneToMany(() => Order, (order) => order.user_id)
+  orders: Order[];
+  
+  @OneToOne(() => Wallet, (wallet) => wallet.user_id)
+  wallet: Wallet;
+
+  @OneToOne(() => Cart, (cart) => cart.user_id)
+  cart: Cart;
+
+  @OneToOne(() => Rate, (rate) => rate.user_id)
+  rate: Rate;
 }

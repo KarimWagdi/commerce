@@ -7,13 +7,11 @@ export class Wallet {
   id!: number;
 
   @OneToOne(() => User, (user) => user.id)
-  user: User;
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-      user_id: number;
+  user_id: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'decimal' })
   balance!: number;
-
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

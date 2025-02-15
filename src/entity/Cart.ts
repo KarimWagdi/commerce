@@ -1,12 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn, JoinColumn, OneToOne } from "typeorm";
 import { Product } from "./Product";
+import { User } from "./User";
 
 @Entity()
 export class Cart {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @OneToOne(() => User, user => user.id)
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user_id!: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
