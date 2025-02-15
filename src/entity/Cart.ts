@@ -21,8 +21,6 @@ export class Cart {
   @DeleteDateColumn({ type: 'timestamp', nullable: true })
   deletedAt: Date;
 
-
-  
-  @OneToMany(() => Product, (product) => product.cart)
-  products: Product[];
+  // @OneToMany(() => Product, (product) => product.cart)
+  // products: Product[];
 }

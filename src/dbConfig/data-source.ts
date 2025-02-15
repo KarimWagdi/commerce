@@ -2,30 +2,24 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { User } from "../entity/User";
 import { Product } from "../entity/Product";
-
 import { Cart } from "../entity/Cart";
-
-
-
 import { Wallet } from "../entity/wallet";
 import { Rate } from "../entity/Rate";
+import { Category } from "../entity/Category";
+import { Order } from "../entity/Order";
+import * as dotenv from "dotenv";
 
-
-
+dotenv.config();  
 export const AppDataSource = new DataSource({
   type: "mysql",
-  host: "localhost",
+  host: process.env.DB_HOST,
   port: 3306,
-  username: "root",
-
-
-  password: "Password@12345",
-  database: "software",
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   synchronize: true,
   logging: true,
-  entities: [User, Product, Rate, cart, Wallet],
-
-
+  entities: [User, Product, Rate, Cart, Wallet,Category, Order],
   migrations: [],
   subscribers: [],
   

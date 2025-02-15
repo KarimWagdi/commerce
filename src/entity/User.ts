@@ -39,15 +39,15 @@ export class User {
   })
   role!: UserRole;
 
-  @OneToMany(() => Product, (product) => product.user_id)
-  product: Product[];
+  // @OneToMany(() => Product, (product) => product.user_id)
+  // product: Product[];
 
 
-  @OneToOne(() => Wallet, (wallet) => wallet.user_id)
-     wallet: Wallet;
+  // @OneToOne(() => Wallet, (wallet) => wallet.user_id)
+  //    wallet: Wallet;
 
-  @OneToMany(() => Order, (order) => order.user)
-  orders!: Order[];
+  // @OneToMany(() => Order, (order) => order.user)
+  // orders!: Order[];
 
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

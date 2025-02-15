@@ -13,8 +13,8 @@ export class Product {
     @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
     user_id: number;
 
-    @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.product)
-    orderProducts!: OrderProduct[];
+    // @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.product)
+    // orderProducts!: OrderProduct[];
 
     
     @Column({ type: 'varchar', length: 100 })

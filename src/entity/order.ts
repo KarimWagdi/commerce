@@ -21,7 +21,7 @@ export class Order {
     @Column({ nullable: true })
     delivery_id!: string;
 
-    @Column({ type: "decimal", precision: 10, scale: 2 })
+    @Column({ type: "decimal"})
     total_price!: number;
 
     @Column({
@@ -31,11 +31,11 @@ export class Order {
     })
     state!: OrderState;
 
-    @ManyToOne(() => User, (user) => user.orders)
-    user!: User;
+    // @ManyToOne(() => User, (user) => user.orders)
+    // user!: User;
 
-    @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order)
-    orderProducts!: OrderProduct[];
+    // @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order)
+    // orderProducts!: OrderProduct[];
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt!: Date;
