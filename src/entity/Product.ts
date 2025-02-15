@@ -1,4 +1,6 @@
+
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
 import { User } from "./User";
 import { OrderProduct } from "./OrderProduct";
 
@@ -20,6 +22,9 @@ export class Product {
     
     @Column({ type: 'decimal', precision: 10, scale: 2 })
     price: number;
+    
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    cart: number;
     
     @Column({ type: 'varchar', length: 255 })
     description: string;
