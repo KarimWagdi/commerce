@@ -7,6 +7,7 @@ class CategoryController {
     static getCategory =  async ( request: any, response: Response ): Promise<void> => {
         try{
         const categoryRepository = AppDataSource.getRepository("category");
+        console.log(request.user.role);
         const category = await categoryRepository.find();
         response.json(category);
         } catch(error){

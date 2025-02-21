@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, UpdateDateColumn, DeleteDateColumn, JoinColumn, OneToOne } from "typeorm";
-import { Product } from "./Product";
+import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, DeleteDateColumn, JoinColumn, OneToOne, OneToMany } from "typeorm";
 import { User } from "./User";
+import { CartItems } from "./CartItems";
 
 @Entity()
 export class Cart {
@@ -9,9 +9,9 @@ export class Cart {
 
   @OneToOne(() => User, user => user.id)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-  user_id!: number;
+  user_id!: User;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
+  @Column({ type: 'decimal' })
   total_price!: number;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
@@ -23,6 +23,7 @@ export class Cart {
   @DeleteDateColumn({ type: 'timestamp', nullable: true })
   deletedAt: Date;
 
-  // @OneToMany(() => Product, (product) => product.cart)
-  // products: Product[];
+  @OneToMany(() => CartItems, cartItems => cartItems.cart_id)
+  cartItems: CartItems[];
+
 }

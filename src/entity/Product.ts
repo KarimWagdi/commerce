@@ -1,8 +1,11 @@
 
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 import { User } from "./User";
-import { OrderProduct } from "./OrderProduct";
+import { OrderDetails } from "./OrderDetails";
+import { Category } from "./Category";
+import { Rate } from "./Rate";
+import { CartItems } from "./CartItems";
 
 @Entity()
 export class Product {
@@ -11,20 +14,17 @@ export class Product {
 
     @ManyToOne(() => User, user => user.id)
     @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-    user_id: number;
+    user_id: User;
 
-    // @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.product)
-    // orderProducts!: OrderProduct[];
+    @ManyToOne(() => Category, (category) => category.id)
+    @JoinColumn({ name: 'category_id', referencedColumnName: 'id' })
+    category_id: Category;
 
-    
     @Column({ type: 'varchar', length: 100 })
     name: string;
     
-    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    @Column({ type: 'decimal' })
     price: number;
-    
-    @Column({ type: 'decimal', precision: 10, scale: 2 })
-    cart: number;
     
     @Column({ type: 'varchar', length: 255 })
     description: string;
@@ -40,5 +40,14 @@ export class Product {
     
     @Column({ type: 'timestamp', nullable: true })
     updatedAt: Date;
+
+    @OneToMany(() => OrderDetails, (orderDetails) => orderDetails.product_id)
+    orderDetails: OrderDetails[];
+
+    @OneToMany(() => CartItems, (cartItems) => cartItems.product_id)
+    cartItems: CartItems[];
+
+    @OneToMany(() => Rate, (rate) => rate.product_id)
+    rate: Rate[];
     
 } 

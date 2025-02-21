@@ -10,11 +10,11 @@ import {
 export class AddRate {
   @IsNumber()
   @IsNotEmpty()
-  productId: number;
+  product_id: number;
 
   @IsNumber()
   @IsNotEmpty()
-  userId: number;
+  user_id: number;
 
   @Min(1)
   @Max(5)
@@ -29,12 +29,13 @@ export class AddRate {
 export class updateRate {
   @IsNumber()
   @IsNotEmpty()
-  productId: number;
+  product_id: number;
 
   @IsNumber()
   @IsNotEmpty()
-  userId: number;
+  user_id: number;
 
+  @IsOptional()
   @Max(5)
   @Min(1)
   rate: number;

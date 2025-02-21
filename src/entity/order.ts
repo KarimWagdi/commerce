@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, UpdateDateColumn, DeleteDateColumn, JoinColumn } from "typeorm";
 import { User } from "./User";
-import { OrderProduct } from "./OrderProduct";
+import { OrderDetails } from "./OrderDetails";
 
 export enum OrderState {
     PENDING = "pending",
@@ -17,10 +17,7 @@ export class Order {
 
     @ManyToOne(() => User, user => user.id)
     @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-    user_id!: number;
-
-    @Column({ nullable: true })
-    delivery_id!: string;
+    user_id!: User;
 
     @Column({ type: "decimal"})
     total_price!: number;
@@ -32,9 +29,6 @@ export class Order {
     })
     state!: OrderState;
 
-    // @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order)
-    // orderProducts!: OrderProduct[];
-
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt!: Date;
     
@@ -43,4 +37,7 @@ export class Order {
 
     @DeleteDateColumn({ type: 'timestamp', nullable: true })
     deletedAt!: Date;
+
+    @OneToMany(() => OrderDetails, orderDetails => orderDetails.order_id)
+    orderDetails: OrderDetails[];
 }

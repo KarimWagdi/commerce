@@ -17,7 +17,7 @@ export class Rate {
 
   @ManyToOne(() => Product, product => product.id)
   @JoinColumn({ name: 'product_id', referencedColumnName: 'id' })
-  product_id!: Product;
+  product_id: Product;
 
   @ManyToOne(() => User, user => user.id)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })

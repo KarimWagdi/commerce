@@ -1,29 +1,25 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, UpdateDateColumn, DeleteDateColumn, JoinColumn } from "typeorm";
 import { Product } from "./Product";
 import { Order } from "./Order";
 
 @Entity()
-export class OrderProduct {
+export class OrderDetails {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column()
-    order_id!: number;
+    @ManyToOne(() => Order, order => order.id)
+    @JoinColumn({ name: 'order_id', referencedColumnName: 'id' })
+    order_id!: Order;
 
-    @Column()
-    product_id!: number;
+    @ManyToOne(() => Product, product => product.id)
+    @JoinColumn({ name: 'product_id', referencedColumnName: 'id' })
+    product_id: Product;
 
     @Column({ type: "int", default: 1 })
     quantity!: number;
 
     @Column({ type: "decimal", precision: 10, scale: 2 })
     unit_price!: number;
-
-    // @ManyToOne(() => Order, (order) => order.orderProducts)
-    // order!: Order;
-
-    // @ManyToOne(() => Product, (product) => product.orderProducts)
-    // product!: Product;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt!: Date;

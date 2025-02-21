@@ -10,17 +10,17 @@ import {
   export class AddWallet {
     @IsNumber()
     @IsNotEmpty()
-    userId: number;
+    user_id: number;
   
     @IsNumber()
     @IsNotEmpty()
     balance: number;
   } 
   
-  export class updateWallet {
+  export class UpdateWallet {
     @IsNumber()
     @IsNotEmpty()
-    userId: number;
+    user_id: number;
   
     @IsNumber()
     @IsNotEmpty()

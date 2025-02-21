@@ -49,13 +49,13 @@ export class User {
 
   @OneToMany(() => Order, (order) => order.user_id)
   orders: Order[];
+
+  @OneToMany(() => Rate, (rate) => rate.user_id)
+  rate: Rate;
   
   @OneToOne(() => Wallet, (wallet) => wallet.user_id)
   wallet: Wallet;
 
   @OneToOne(() => Cart, (cart) => cart.user_id)
   cart: Cart;
-
-  @OneToOne(() => Rate, (rate) => rate.user_id)
-  rate: Rate;
 }
