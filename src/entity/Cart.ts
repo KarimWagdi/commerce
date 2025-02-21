@@ -11,7 +11,7 @@ export class Cart {
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user_id!: User;
 
-  @Column({ type: 'decimal' })
+  @Column({ type: 'decimal', nullable: true })
   total_price!: number;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

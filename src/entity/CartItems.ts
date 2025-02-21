@@ -18,6 +18,9 @@ export class CartItems {
   @Column({ type: 'decimal' })
   total_item_price!: number;
 
+  @Column({ type: 'decimal' })
+  quantity!: number;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 

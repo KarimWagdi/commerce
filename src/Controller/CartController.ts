@@ -13,6 +13,7 @@ class CartController {
             response.status(500).json({ message: error });
         }
     };
+    
     static addCart =  async ( request: any, response: Response ): Promise<void> => {
         try{
             const CartRepository = AppDataSource.getRepository("cart");

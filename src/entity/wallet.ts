@@ -10,7 +10,7 @@ export class Wallet {
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user_id: User;
 
-  @Column({ type: 'decimal' })
+  @Column({ type: 'decimal', default: 0 })
   balance!: number;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

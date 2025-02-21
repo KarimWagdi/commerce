@@ -6,7 +6,7 @@ export class Category {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({unique: true})
   name!: string;
   
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

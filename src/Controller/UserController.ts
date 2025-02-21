@@ -1,7 +1,6 @@
 import { Response } from "express";
 import bcrypt from "bcrypt";
 import { AppDataSource } from "../dbConfig/data-source";
-import { User } from "../entity/User";
 const jwt = require('jsonwebtoken');
 
 
@@ -22,12 +21,15 @@ class UserController {
     static addUser =  async ( request: any, response: Response ): Promise<void> => {
         try{
             const userRepository = AppDataSource.getRepository("user");
+            const walletRepository = AppDataSource.getRepository("Wallet")
+            const cartRepository = AppDataSource.getRepository("cart");
             const hashedPassword = await bcrypt.hash(request.body.password, 10);
             request.body.password = hashedPassword;
             const savedUser = await userRepository.save(request.body);
             const token = jwt.sign({ userId: savedUser.id }, jwtSecret, { expiresIn: '1h' });
-            // await userRepository.update(savedUser.id, {token: token});
-            response.send({accessToken: token, user: savedUser});
+            const walletData = await walletRepository.save({user_id: savedUser.id})
+            const cartData = await cartRepository.save({user_id: savedUser.id})
+            response.json({accessToken: token, user: savedUser, wallet: walletData, cart: cartData});
         } catch(error){
             response.status(500).json({ message: error });
         }
@@ -71,6 +73,7 @@ class UserController {
             response.status(500).json({ message: error});
         }
     };
+    static WalletController: any;
 
 }
 
