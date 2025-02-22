@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/', verifyToken, CartItemController.getCartItem);
 router.post('/', verifyToken, CartItemController.addCartItem);
-// router.put('/:id', CartItemController.updateCart);
-router.delete('/:id', verifyToken, CartItemController.deleteUser);
+router.post('/decrease', verifyToken, CartItemController.decrease);
+router.delete('/:id', verifyToken, CartItemController.deleteCartItem);
 
 export default router
