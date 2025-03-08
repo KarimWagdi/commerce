@@ -32,41 +32,24 @@ class OrderController {
         }
     }
 
-    static async createOrder(req: Request, res: Response) {
+    static async createOrder(req: any, res: Response) {
         try {
             const orderRepository = AppDataSource.getRepository("Order");
-            const orderProductRepository = AppDataSource.getRepository("OrderProduct");
-
-            // Start transaction
-            await AppDataSource.manager.transaction(async (transactionalEntityManager) => {
-                // Create order
-                const newOrder = orderRepository.create({
-                    user_id: req.body.user_id,
-                    total_price: req.body.total_price,
-                });
-
-                const savedOrder = await transactionalEntityManager.save(newOrder);
-
-                // Create order products
-                const orderProducts = req.body.products.map((product: any) => {
-                    return orderProductRepository.create({
-                        order_id: savedOrder.id,
-                        product_id: product.product_id,
-                        quantity: product.quantity,
-                        unit_price: product.unit_price
-                    });
-                });
-
-                await transactionalEntityManager.save(orderProducts);
-
-                res.status(201).json({
-                    message: "Order created successfully",
-                    order: {
-                        ...savedOrder,
-                        orderProducts
-                    }
-                });
-            });
+            const orderDetails = AppDataSource.getRepository('order_details')
+            const CartItemRepository = AppDataSource.getRepository("cart_items");
+            const orderData = await CartItemRepository.find({where:{cart_id:{id: req.params.id}},
+                 relations:["product_id"]})
+            let total_price = 0
+            orderData.forEach(item => {
+                total_price += +item.total_item_price
+            })
+            const order = await orderRepository.save({user_id: req.user.id, total_price: total_price})
+            orderData.forEach( async item => {
+                const data = await orderDetails.save({order_id: order.id, product_id:{id: item.product_id.id},
+                     quantity: item.quantity, unit_price: item.total_item_price / item.quantity})
+                await CartItemRepository.softRemove({id: item.id})
+            })
+            res.json(order)
         } catch (error) {
             res.status(500).json({ message: error });
         }

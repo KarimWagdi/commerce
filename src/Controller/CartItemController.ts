@@ -20,10 +20,11 @@ class CartItemController {
             const CartRepository = AppDataSource.getRepository("cart");
             const CartItemRepository = AppDataSource.getRepository("cart_items");
             const productRepository = AppDataSource.getRepository(Product);
-            const cart = await CartRepository.findOne({where:{user_id:request.user.id}});
+            const cart = await CartRepository.findOne({where:{user_id: {id: request.user.id}}});
             const product = await productRepository.findOne({where:{id:request.body.product_id}});
-            const isExist = await CartItemRepository.findOne({ where:{ cart_id: +cart?.id, product_id: { id: request.body.product_id }}});
+            const isExist = await CartItemRepository.findOne({ where:{ cart_id:{id: +cart?.id}, product_id: { id: request.body.product_id }}});
             if(!isExist){
+                console.log(1);
                 const newCartItem = CartItemRepository.create({...request.body, cart_id: cart?.id, quantity: 1, total_item_price: product?.price });
                 const data = await CartItemRepository.save(newCartItem);
                 response.json(data);
@@ -36,7 +37,7 @@ class CartItemController {
                     total_item_price: (+isExist.quantity + 1) * ( product?.price ?? 0)
                 }
                 await CartItemRepository.update(isExist.id, obj);
-                const data = await CartItemRepository.findOne({ where:{ cart_id: +cart?.id, product_id: { id: request.body.product_id }}});
+                const data = await CartItemRepository.findOne({ where:{ cart_id:{ id: +cart?.id}, product_id: { id: request.body.product_id }}});
                 response.json(data);
                 return
             }
@@ -52,7 +53,7 @@ class CartItemController {
             const productRepository = AppDataSource.getRepository(Product);
             const cart = await CartRepository.findOne({where:{user_id:request.user.id}});
             const product = await productRepository.findOne({where:{id:request.body.product_id}});
-            const isExist = await CartItemRepository.findOne({ where:{ cart_id: +cart?.id, product_id: { id: request.body.product_id }}});
+            const isExist = await CartItemRepository.findOne({ where:{ cart_id:{id: +cart?.id}, product_id: { id: request.body.product_id }}});
             if(!isExist){
                 response.json("no products");
                 return
