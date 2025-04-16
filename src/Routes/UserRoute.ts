@@ -1,18 +1,15 @@
-import { Router } from 'express'
-import UserController from '../Controller/UserController'
-import requestValidate from '../MiddelWares/RequestValidate';
-import { AddUser } from '../Request/UserRequest';
-const router = Router()
+import { Router } from "express";
+import UserController from "../Controller/UserController";
+const router = Router();
 
-router.get('/', UserController.getUser);
+router.get("/", UserController.getUser);
 
-router.post('/', UserController.addUser);
+router.post("/", UserController.addUser);
 
-router.post('/login', UserController.loginUser);
+router.post("/login", UserController.loginUser);
 
-router.put('/:id', UserController.updateUser);
+router.put("/:id", UserController.updateUser);
 
-router.delete('/:id', UserController.deleteUser);
+router.delete("/:id", UserController.deleteUser);
 
-
-export default router
+export default router;

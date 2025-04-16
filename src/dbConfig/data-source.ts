@@ -11,7 +11,7 @@ import * as dotenv from "dotenv";
 import { CartItems } from "../entity/CartItems";
 import { OrderDetails } from "../entity/OrderDetails";
 
-dotenv.config();  
+dotenv.config();
 export const AppDataSource = new DataSource({
   type: "mysql",
   host: process.env.DB_HOST,
@@ -21,12 +21,20 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true,
   logging: true,
-  entities: [User, Product, Rate, Cart, Wallet,Category, Order, CartItems, OrderDetails],
+  entities: [
+    User,
+    Product,
+    Rate,
+    Cart,
+    Wallet,
+    Category,
+    Order,
+    CartItems,
+    OrderDetails,
+  ],
   migrations: [],
   subscribers: [],
-  
-}); 
-
+});
 
 AppDataSource.initialize()
   .then(() => {
