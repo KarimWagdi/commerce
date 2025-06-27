@@ -1,13 +1,14 @@
 import { Router } from 'express'
 import WalletController from '../Controller/WalletController'
+import verifyToken from '../MiddelWares/Auth';
 const router = Router()
 
-router.get('/', WalletController.getWallet);
+router.get('/',verifyToken, WalletController.getWallet);
 
-router.post('/', WalletController.addWallet);
+router.post('/',verifyToken, WalletController.addWallet);
 
-router.put('/:id', WalletController.updateWallet);
+router.put('/:id',verifyToken, WalletController.updateWallet);
 
-router.delete('/:id', WalletController.deleteWallet);
+router.delete('/:id',verifyToken, WalletController.deleteWallet);
 
 export default router
